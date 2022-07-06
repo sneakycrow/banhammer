@@ -1,6 +1,7 @@
 import Navigation from "./Navigation";
 import { AppShell, Button, Header, Navbar } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
+import { News, Prison, Sword } from "tabler-icons-react";
 
 export const DashboardLayout = ({ children }) => {
   const [navbarOpened, setNavbarOpened] = useLocalStorage({
@@ -12,13 +13,45 @@ export const DashboardLayout = ({ children }) => {
       padding="md"
       navbar={
         <Navbar
-          width={{ base: navbarOpened === "opened" ? 300 : 75 }}
-          height="100vh"
-          p="xs"
+          sx={(theme) => ({
+            height: "100vh",
+            padding: theme.spacing.xs,
+            width: navbarOpened === "opened" ? 300 : 75,
+            display: "flex",
+            flexDirection: "column",
+            ">*": {
+              marginTop: 10,
+            },
+          })}
         >
           <Navbar.Section>
-            <Button variant="subtle" fullWidth>
-              Assets/Hosts
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<News size={24} />}
+            >
+              News
+            </Button>
+          </Navbar.Section>
+          <Navbar.Section>
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<Prison size={24} />}
+            >
+              Master Ban Index
+            </Button>
+          </Navbar.Section>
+          <Navbar.Section>
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<Sword size={24} />}
+            >
+              Personal Ban Index
             </Button>
           </Navbar.Section>
         </Navbar>
