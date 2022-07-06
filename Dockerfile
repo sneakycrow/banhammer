@@ -28,6 +28,7 @@ RUN yarn build
 
 # Production image, copy all the files and run next
 FROM node:16-alpine AS runner
+RUN apk --no-cache add curl
 WORKDIR /app
 
 ENV NODE_ENV production
