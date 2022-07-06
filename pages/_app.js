@@ -22,6 +22,20 @@ export default function App({
           withNormalizeCSS
           theme={{
             colorScheme: "dark",
+            fontSizes: {
+              md: "1rem",
+              xl: "3rem",
+            },
+            headings: {
+              sizes: {
+                h1: {
+                  fontSize: "10em",
+                },
+                h2: {
+                  fontSize: "8em",
+                },
+              },
+            },
           }}
         >
           <Component {...pageProps} />

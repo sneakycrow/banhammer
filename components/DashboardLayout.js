@@ -1,21 +1,68 @@
 import Navigation from "./Navigation";
-import { Anchor, AppShell, Header, Navbar } from "@mantine/core";
-import Link from "next/link";
+import { AppShell, Button, Header, Navbar } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
+import { News, Prison, Sword } from "tabler-icons-react";
 
 export const DashboardLayout = ({ children }) => {
+  const [navbarOpened, setNavbarOpened] = useLocalStorage({
+    key: "navbar-state",
+    defaultValue: "opened",
+  });
   return (
     <AppShell
       padding="md"
       navbar={
-        <Navbar width={{ base: 300 }} height={500} p="xs">
-          <Link href={"/dashboard"}>
-            <Anchor component={"a"}>Dashboard</Anchor>
-          </Link>
+        <Navbar
+          sx={(theme) => ({
+            height: "100vh",
+            padding: theme.spacing.xs,
+            width: navbarOpened === "opened" ? 300 : 75,
+            display: "flex",
+            flexDirection: "column",
+            ">*": {
+              marginTop: 10,
+            },
+          })}
+        >
+          <Navbar.Section>
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<News size={24} />}
+            >
+              News
+            </Button>
+          </Navbar.Section>
+          <Navbar.Section>
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<Prison size={24} />}
+            >
+              Master Ban Index
+            </Button>
+          </Navbar.Section>
+          <Navbar.Section>
+            <Button
+              styles={{ label: { width: "100%" } }}
+              fullWidth
+              variant="subtle"
+              leftIcon={<Sword size={24} />}
+            >
+              Personal Ban Index
+            </Button>
+          </Navbar.Section>
         </Navbar>
       }
       header={
         <Header>
-          <Navigation />
+          <Navigation
+            onMenuClick={() =>
+              setNavbarOpened(navbarOpened === "opened" ? "closed" : "opened")
+            }
+          />
         </Header>
       }
       styles={(theme) => ({
