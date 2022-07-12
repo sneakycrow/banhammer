@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { signOut } from "next-auth/react";
 import { DotsVertical, Logout } from "tabler-icons-react";
+import DebugModal from "./DebugModal";
 
 const Profile = ({ avatarURL = "", name = "", email }) => {
   const [opened, setOpened] = useState(false);
@@ -46,6 +47,7 @@ const Profile = ({ avatarURL = "", name = "", email }) => {
             <Logout />
           </Group>
         </Button>
+        <DebugModal />
       </Group>
     </Popover>
   );
