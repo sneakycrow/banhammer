@@ -18,14 +18,16 @@ export const handler = async (req, res) => {
   const client = new SESv2Client({});
   const command = new CreateContactCommand(input);
   try {
-    const response = await client.send(command);
+    await client.send(command);
     res.send({
-      statusCode: response["$metadata"].httpStatusCode,
+      statusCode: 200,
       status: "pending confirmation",
     });
   } catch (e) {
     if (e instanceof AlreadyExistsException) {
       res.send({ statusCode: 200, status: "pending confirmation" });
+    } else {
+      res.send({ statusCode: 500, status: "failure" });
     }
   }
 };
